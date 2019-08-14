@@ -7,27 +7,27 @@
   ],
   "env": {
     "STRIPE_KEY": {
-      "description": "stripe backend access token",
+      "description": "Stripe Secret API Key",
       "required": true
     },
     "VGS_PROXY": {
-      "description": "full url with credential of the vgs proxy returned by the dashboard",
+      "description": "Full URL with credentials for the VGS outbound proxy: https://USERNAME:PASSWORD@<vault-id>.SANDBOX.verygoodproxy.com:8080",
       "required": true
     },
     "VGS_PROXY_CERTIFICATE_B64": {
-      "description": "vgs proxy certificate encode in a  base64 long string",
+      "description": "VGS proxy certificate encoded as a base64 string",
       "required": true
     },
     "PUBLIC_URL": {
-      "description": "the public url of the server without `/` at the end, https://{app-name}.herokuapp.com",
+      "description": "The public URL of the server without `/` at the end, https://{app-name}.herokuapp.com",
       "required": true
     },
     "VGS_COLLECT_LIBRARY_URL": {
-      "description": "vgs dashboard>VGS Collect",
+      "description": "https://dashboard.verygoodsecurity.com -> VGS Collect page",
       "required": true
     },
     "VAULT_ID": {
-      "description": "vgs dashboard>settings>Identifier",
+      "description": "https://dashboard.verygoodsecurity.com -> Settings -> Identifier",
       "required": true
     }
   }
