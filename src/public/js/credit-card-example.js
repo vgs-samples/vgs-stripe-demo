@@ -52,13 +52,23 @@ document.getElementById('cc-form')
         var targetForm = e.target;
         e.preventDefault();
         var form_error = $("#form-error");
+        var valid_form = true;
+        var keys = Object.keys(f.state);
+        for (var key = 0; key < keys.length; key++) {
+            valid_form = valid_form && f.state[keys[key]].isValid;
+        }
+        if (!valid_form) {
+            return
+        }
         form_error.text("");
         form_error.hide();
-
         $('#purchase-btn').prepend('<span id="purchase-loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+        $('#purchase-btn').prop('disabled', true);
+
         //submit and send the amount of the transaction
         f.submit('/post', {}, function (status, data) {
             $('#purchase-loader').remove();
+            $('#purchase-btn').prop('disabled', false);
             if (data && data.kind) {
                 if (data.kind === "transaction_succeeded_without_3ds") {
                     //close modal
