@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  stripe-demo:
+    env_file:
+      - .env
+    build: .
+    ports:
+      - "3000"
+

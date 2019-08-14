@@ -1,0 +1,88 @@
+data:
+ -
+  attributes:
+   created_at: '2019-08-11T13:16:17'
+   destination_override_endpoint: '*'
+   entries:
+    -
+     id: 1bcc65c7-eec1-4d2a-b1fe-632f2791bac5
+     phase: REQUEST
+     operation: ENRICH
+     token_manager: PERSISTENT
+     public_token_generator: FPE_T_FOUR
+     transformer: FORM_FIELD
+     transformer_config:
+      - 'card[number]'
+     transformer_config_map: null
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      condition: AND
+      rules:
+       -
+        condition: null
+        rules: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: equals
+         values: [/v1/tokens]
+       -
+        condition: null
+        rules: null
+        expression:
+         field: ContentType
+         type: string
+         operator: media_type_equals
+         values: [application/x-www-form-urlencoded]
+      expression: null
+    -
+     id: 1046c923-493d-4aee-8633-f7a227883ce7
+     phase: REQUEST
+     operation: ENRICH
+     token_manager: PERSISTENT
+     public_token_generator: UUID
+     transformer: FORM_FIELD
+     transformer_config:
+      - 'card[cvc]'
+     transformer_config_map: null
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      condition: AND
+      rules:
+       -
+        condition: null
+        rules: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: equals
+         values: [/v1/tokens]
+       -
+        condition: null
+        rules: null
+        expression:
+         field: ContentType
+         type: string
+         operator: media_type_equals
+         values: [application/x-www-form-urlencoded]
+      expression: null
+   host_endpoint: api.stripe.com
+   id: 283048c5-4601-417a-ad00-c84f3f580b4c
+   ordinal: null
+   port: 443
+   protocol: http
+   source_endpoint: '*'
+   tags:
+    name: 'reveal to stripe'
+   updated_at: '2019-08-11T18:01:04'
+  id: 283048c5-4601-417a-ad00-c84f3f580b4c
+  type: rule_chain
+version: 1

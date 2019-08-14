@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://www.verygoodsecurity.com/theme/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script src="https://verygoodsecurity.github.io/vgs-collect-examples/vendor/jquery-3.3.1.min.js"></script>
+    <script src="https://verygoodsecurity.github.io/vgs-collect-examples/vendor/bootstrap/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- Modal -->
+<div id="request-card" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <iframe id="iframe-modal-content"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<main>
+    <div class="container">
+        <h1 class="mt-5 pb-3 text-center">VGS Collect.js and Stripe 3DS Flow Demo</h1>
+        <hr>
+        <section id="3ds-purchase-example" class="container py-lg-5 example-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Please fill in all input fields and then submit a form.
+                    </p>
+                    <br>
+
+                    <form id="purchase-form">
+                        <fieldset>
+                            <div id="cc-amount" class="form-group">
+                                <label for="cc-amount-field">Amount (cents USD)</label>
+                                <span class="form-control">
+                                <input id="cc-amount-field" type="number" aria-label="Number input" aria-placeholder=""
+                                       aria-invalid="false" inputmode="numeric" value="100">
+                            </span>
+                                <span class="error-message" data-name="card.amount"></span>
+                            </div>
+                        </fieldset>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#request-card">Purchase</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    <span class="badge badge-warning"
+                          style="margin-right: 16px; display: inline-flex; align-items: center;">Status</span> <span
+                            id="tx_status">...</span>
+                    </div>
+                    <br>
+                    <div class="row">
+                    <span class="badge  badge-warning"
+                          style="margin-right: 16px; display: inline-flex; align-items: center;">Message</span> <span
+                            id="tx_message">...</span>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script type="text/javascript">
+    //disable form submit
+    $('form').submit(false);
+
+    //open iframe when modal is show
+    $('#request-card').on('shown.bs.modal', function () {
+        $(this).find('iframe').attr('src', '/credit-card.html?amount=' + $('#cc-amount-field').val())
+    });
+
+    var eventMethod = window.addEventListener
+        ? "addEventListener"
+        : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod === "attachEvent"
+        ? "onmessage"
+        : "message";
+    eventer(messageEvent, function (e) {
+        let message = e.data || e.message;
+        if (message && message.kind && message.kind === "close-modal") {
+            $('#request-card').modal('hide');
+            if (message.data && message.data && message.data.kind) {
+                if (message.data.kind === "transaction_succeeded_without_3ds") {
+                    $('#tx_status').text('succeeded');
+                    $('#tx_message').text('credit card does not support 3D Secure authentication');
+                }
+                if (message.data.kind === "payment_intent") {
+                    if (message.data.status === "succeeded") {
+                        $('#tx_status').text('succeeded');
+                        $('#tx_message').text('transaction used 3D Secure authentication');
+                    } else {
+                        $('#tx_status').text('failure');
+                        $('#tx_message').text('client could not to authenticate');
+                    }
+
+                }
+
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

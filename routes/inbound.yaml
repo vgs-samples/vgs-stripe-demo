@@ -1,0 +1,88 @@
+data:
+ -
+  attributes:
+   created_at: '2019-08-11T13:12:38'
+   destination_override_endpoint: 'https://vgs-stripe-3ds-demo.herokuapp.com'
+   entries:
+    -
+     id: b5a14f23-f0ef-4495-a1ff-5cccaabfbabb
+     phase: REQUEST
+     operation: REDACT
+     token_manager: PERSISTENT
+     public_token_generator: UUID
+     transformer: JSON_PATH
+     transformer_config:
+      - $.cardCvc
+     transformer_config_map: null
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      condition: AND
+      rules:
+       -
+        condition: null
+        rules: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: equals
+         values: [/post]
+       -
+        condition: null
+        rules: null
+        expression:
+         field: ContentType
+         type: string
+         operator: media_type_equals
+         values: [application/json;charset=UTF-8]
+      expression: null
+    -
+     id: 5bf02f13-3d25-43de-a376-9bf37252039b
+     phase: REQUEST
+     operation: REDACT
+     token_manager: PERSISTENT
+     public_token_generator: FPE_T_FOUR
+     transformer: JSON_PATH
+     transformer_config:
+      - $.cardNumber
+     transformer_config_map: null
+     operations: null
+     targets:
+      - body
+     id_selector: null
+     classifiers: {}
+     config:
+      condition: AND
+      rules:
+       -
+        condition: null
+        rules: null
+        expression:
+         field: PathInfo
+         type: string
+         operator: matches
+         values: [/post]
+       -
+        condition: null
+        rules: null
+        expression:
+         field: ContentType
+         type: string
+         operator: media_type_equals
+         values: [application/json]
+      expression: null
+   host_endpoint: '(.*)\.verygoodproxy\.com'
+   id: 939dc9fa-5110-4f06-8c6c-b6f82682857c
+   ordinal: null
+   port: 0
+   protocol: http
+   source_endpoint: '*'
+   tags:
+    name: secure-card
+   updated_at: '2019-08-11T13:55:25'
+  id: 939dc9fa-5110-4f06-8c6c-b6f82682857c
+  type: rule_chain
+version: 1

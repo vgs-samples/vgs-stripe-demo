@@ -1,0 +1,34 @@
+{
+  "name": "VGS Collect.js and Stripe 3DS Flow Demo",
+  "description": "",
+  "repository": "https://github.com/verygoodsecurity/vgs-stripe-demo.git",
+  "keywords": [
+    ""
+  ],
+  "env": {
+    "STRIPE_KEY": {
+      "description": "stripe backend access token",
+      "required": true
+    },
+    "VGS_PROXY": {
+      "description": "full url with credential of the vgs proxy returned by the dashboard",
+      "required": true
+    },
+    "VGS_PROXY_CERTIFICATE_B64": {
+      "description": "vgs proxy certificate encode in a  base64 long string",
+      "required": true
+    },
+    "PUBLIC_URL": {
+      "description": "the public url of the server without `/` at the end, https://{app-name}.herokuapp.com",
+      "required": true
+    },
+    "VGS_COLLECT_LIBRARY_URL": {
+      "description": "vgs dashboard>VGS Collect",
+      "required": true
+    },
+    "VAULT_ID": {
+      "description": "vgs dashboard>settings>Identifier",
+      "required": true
+    }
+  }
+}
