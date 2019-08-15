@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -10,12 +11,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="https://www.verygoodsecurity.com/theme/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <script type="text/javascript"
-            src="{{VGS_COLLECT_LIBRARY_URL}}"></script>
+    <link rel="stylesheet" type="text/css" href="https://www.verygoodsecurity.com/theme/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="{{VGS_COLLECT_LIBRARY_URL}}"></script>
     <script src="https://verygoodsecurity.github.io/vgs-collect-examples/vendor/jquery-3.3.1.min.js"></script>
     <script src="https://verygoodsecurity.github.io/vgs-collect-examples/vendor/bootstrap/bootstrap.min.js"></script>
     <script src="js/highlight.js"></script>
@@ -24,90 +24,123 @@
 </head>
 
 <body>
-<main>
-    <div class="container">
-        <h1 class="mt-5 pb-3 text-center">VGS Collect.js and Stripe 3DS Flow Demo</h1>
-        <hr>
-        <section id="credit-card-example" class="container py-lg-5 example-container">
-            <!--Example Capturing credit card data-->
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>Test Cards</h4>
-                    <table id="test-card-numbers" class="table">
-                        <tr>
-                            <td>
-                                4242424242424242
-                            </td>
-                            <td>
-                                3D Secure authentication not supported, but will charge successfully
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4000000000003055
-                            </td>
-                            <td>
-                                3D Secure authentication supported, will go through the full 3D Secure flow
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4000000000003063
-                            </td>
-                            <td>
-                                3D Secure authentication required, charge will be declined without it
-                            </td>
-                        </tr>
-                    </table>
+    <main>
+        <section class="header main-header">
+            <nav
+                class="navbar navbar-default navbar-light fixed-top navbar-fixed-top navbar-expand flex-column flex-md-row">
+                <div class="container">
+                    <div class="navbar-header pl-3 pr-3">
+                        <a class="navbar-brand" href="/" data-category="header" data-event="homepage">
+                            <img src="img/vgs-logo-demo.svg" alt="logo">
+                        </a>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="github" href="https://github.com/verygoodsecurity/vgs-stripe-demo"><i class="fab fa-github"></i> View on GitHub</a>
+                            </li>
+                            <li>
+                                <a class="btn-log-in" href="https://dashboard.verygoodsecurity.com/"
+                                    data-category="header" data-event="log in">Log In</a></li>
+                            <li class="active">
+                                <a class="btn-get" href="https://dashboard.verygoodsecurity.com/" data-category="header"
+                                    data-event="sign up">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <form id="cc-form">
-                        <fieldset>
-                            <div id="amount" class="form-group">
-                                <label for="amount-field">Amount <b>cents usd</b></label>
-                                <span class="form-control"></span>
-                                <span class="error-message" data-name="card.amount"></span>
-                            </div>
-                            <div id="cc-name" class="form-group">
-                                <label for="cc-name-field">Name on card</label>
-                                <span class="form-control"></span>
-                                <span class="error-message" data-name="card.name"></span>
-                            </div>
-                            <div id="cc-number" class="form-group">
-                                <label for="cc-number-field">Credit card number</label>
-                                <span class="form-control"></span>
-                                <span class="error-message" data-name="card.number"></span>
-                            </div>
-                            <div id="cc-cvc" class="form-group">
-                                <label for="cc-cvc-field">CVC</label>
-                                <span class="form-control"></span>
-                                <span class="error-message" data-name="card.cvc"></span>
-                            </div>
-                            <div id="cc-expiration-date" class="form-group">
-                                <label for="cc-expiration-date-field">Expiration date</label>
-                                <span class="form-control"></span>
-                                <span class="error-message" data-name="card.expirationDate"></span>
-                            </div>
-                        </fieldset>
-                        <div id="form-error" class="alert alert-danger" style="display: none" role="alert"></div>
-                        <button type="submit" id="purchase-btn" class="btn btn-info">
-
-                            Purchase
-                        </button>
-                        <button class="btn btn-secondary btn-dismiss">Cancel</button>
-                    </form>
-                </div>
-
-            </div>
+            </nav>
         </section>
-    </div>
-</main>
-<script src="js/credit-card-example.js"></script>
-<script type="text/javascript">
-    document.querySelector('.btn-dismiss').onclick = function () {
-        // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
-        parent.postMessage({kind: "close-modal", data: null}, "*")
-    };
-</script>
+        <div class="container">
+            <h2 class="mt-5 mb-2 text-center">VGS Collect.js and Stripe 3DS flow demo</h2>
+            <section id="credit-card-example" class="container py-lg-5 example-container">
+                <!--Example Capturing credit card data-->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Test Cards</h4>
+                        <table id="test-card-numbers" class="table">
+                            <tr>
+                                <td>
+                                    4242424242424242
+                                </td>
+                                <td>
+                                    3D Secure authentication not supported, but will charge successfully
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4000000000003055
+                                </td>
+                                <td>
+                                    3D Secure authentication supported, will go through the full 3D Secure flow
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4000000000003063
+                                </td>
+                                <td>
+                                    3D Secure authentication required, charge will be declined without it
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card payment-form-card">
+                            <div class="card-body">
+                                <p class="title">Payment form</p>
+                                <form id="cc-form">
+                                    <fieldset>
+                                        <div id="amount" class="form-group">
+                                            <label for="amount-field">Amount, <b>cents USD</b></label>
+                                            <span class="form-control"></span>
+                                            <span class="error-message" data-name="card.amount"></span>
+                                        </div>
+                                        <div id="cc-name" class="form-group">
+                                            <label for="cc-name-field">Name on card</label>
+                                            <span class="form-control"></span>
+                                            <span class="error-message" data-name="card.name"></span>
+                                        </div>
+                                        <div id="cc-number" class="form-group">
+                                            <label for="cc-number-field">Credit card number</label>
+                                            <span class="form-control"></span>
+                                            <span class="error-message" data-name="card.number"></span>
+                                        </div>
+                                        <div id="cc-cvc" class="form-group">
+                                            <label for="cc-cvc-field">CVC</label>
+                                            <span class="form-control"></span>
+                                            <span class="error-message" data-name="card.cvc"></span>
+                                        </div>
+                                        <div id="cc-expiration-date" class="form-group">
+                                            <label for="cc-expiration-date-field">Expiration date</label>
+                                            <span class="form-control"></span>
+                                            <span class="error-message" data-name="card.expirationDate"></span>
+                                        </div>
+                                    </fieldset>
+                                    <div id="form-error" class="alert alert-danger" style="display: none" role="alert">
+                                    </div>
+                                    <button type="submit" id="purchase-btn" class="btn btn-primary text-center">
+                                        Purchase
+                                    </button>
+                                    <!-- <button class="btn btn-secondary btn-dismiss">Cancel</button> -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="js/credit-card-example.js"></script>
+    <!-- <script type="text/javascript">
+        // if modal
+        document.querySelector('.btn-dismiss').onclick = function () {
+            // parent.postMessage("message to be sent", "http://the-website-that-will-receive-the-msg.com")
+            parent.postMessage({
+                kind: "close-modal",
+                data: null
+            }, "*")
+        };
+    </script> -->
 </body>
+
 </html>

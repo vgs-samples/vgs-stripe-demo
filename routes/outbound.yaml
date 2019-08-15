@@ -81,7 +81,7 @@ data:
    protocol: http
    source_endpoint: '*'
    tags:
-    name: 'reveal to stripe'
+    name: 'Reveal credit card data to Stripe'
    updated_at: '2019-08-11T18:01:04'
   id: 283048c5-4601-417a-ad00-c84f3f580b4c
   type: rule_chain

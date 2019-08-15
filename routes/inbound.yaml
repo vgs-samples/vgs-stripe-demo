@@ -81,7 +81,7 @@ data:
    protocol: http
    source_endpoint: '*'
    tags:
-    name: secure-card
+    name: 'Securely collect credit card data with VGS Collect.js'
    updated_at: '2019-08-11T13:55:25'
   id: 939dc9fa-5110-4f06-8c6c-b6f82682857c
   type: rule_chain

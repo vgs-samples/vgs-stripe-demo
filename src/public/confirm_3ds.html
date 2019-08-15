@@ -1,100 +1,100 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela" rel="stylesheet">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
     <script src="js/urlParams.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://www.verygoodsecurity.com/theme/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-
+    <link rel="stylesheet" type="text/css" href="https://www.verygoodsecurity.com/theme/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
 </head>
 
 <body>
-<center id="spinner">
-    <div class="d-flex justify-content-center">
-        <div class="spinner-grow" style="width: 640px; height: 640px; margin-top: 128px" role="status">
-            <span class="sr-only">Loading...</span>
+    <div id="spinner">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-grow" style="width: 640px; height: 640px; margin-top: 128px" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
     </div>
-</center>
-<main id="main" style="display: none">
-    <div class="container">
-
-        <h1 class="mt-5 pb-3 text-center">VGS Collect.js and Stripe 3DS Flow Demo</h1>
-        <hr>
-        <section id="3ds-purchase-example" class="container py-lg-5 example-container">
-            <!--Example Capturing credit card data-->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                    <span class="badge badge-warning"
-                          style="margin-right: 16px; display: inline-flex; align-items: center;">Status</span> <span
-                            id="tx_status">...</span>
+    <main id="main" style="display: none">
+        <div class="container">
+            <h2 class="mt-5 mb-2 text-center">VGS Collect.js and Stripe 3DS flow demo</h2>
+            <section id="3ds-purchase-example" class="container py-lg-5 example-container">
+                <!--Example Capturing credit card data-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <span class="badge badge-warning"
+                                        style="margin-right: 16px; display: inline-flex; align-items: center;">Status</span>
+                                    <span id="tx_status">...</span>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <span class="badge  badge-warning"
+                                        style="margin-right: 16px; display: inline-flex; align-items: center;">Message</span>
+                                    <span id="tx_message">...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <div class="row">
-                    <span class="badge  badge-warning"
-                          style="margin-right: 16px; display: inline-flex; align-items: center;">Message</span> <span
-                            id="tx_message">...</span>
-
-                    </div>
-
                 </div>
-            </div>
-        </section>
-    </div>
-</main>
-<script>
+            </section>
+        </div>
+    </main>
+    <script>
+        function doPoll() {
+            $.ajax({
+                url: "/transaction_info",
+                data: {
+                    transaction_id: urlParams['transaction_id']
+                },
+                type: 'get',
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    setTimeout(doPoll, 2000);
+                },
+                success: function (data) {
+                    parent.postMessage({
+                        kind: "close-modal",
+                        data: data
+                    }, "*");
 
-
-    function doPoll() {
-        $.ajax({
-            url: "/transaction_info",
-            data: {transaction_id: urlParams['transaction_id']},
-            type: 'get',
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                setTimeout(doPoll, 2000);
-            },
-            success: function (data) {
-                parent.postMessage({kind: "close-modal", data: data}, "*");
-
-                $("#spinner").hide();
-                $("#main").show();
-                if (data.kind === "payment_intent") {
-                    if (data.status === "succeeded") {
-                        $('#tx_status').text('succeeded');
-                        $('#tx_message').text('transaction used 3D Secure authentication');
-                    } else {
-                        $('#tx_status').text('failure');
-                        $('#tx_message').text('client could not to authenticate');
+                    $("#spinner").hide();
+                    $("#main").show();
+                    if (data.kind === "payment_intent") {
+                        if (data.status === "succeeded") {
+                            $('#tx_status').text('succeeded');
+                            $('#tx_message').text('transaction used 3D Secure authentication');
+                        } else {
+                            $('#tx_status').text('failure');
+                            $('#tx_message').text('client could not to authenticate');
+                        }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
 
-    if (urlParams['transaction_succeeded_without_3ds']) {
-        $("#spinner").hide();
-        $("#main").show();
-        $('#tx_status').text('succeeded');
-        $('#tx_message').text('credit card does not support 3D Secure authentication');
-    } else {
-        doPoll();
-    }
-</script>
+        if (urlParams['transaction_succeeded_without_3ds']) {
+            $("#spinner").hide();
+            $("#main").show();
+            $('#tx_status').text('succeeded');
+            $('#tx_message').text('credit card does not support 3D Secure authentication');
+        } else {
+            doPoll();
+        }
+    </script>
 </body>
+
 </html>

@@ -29,7 +29,6 @@ it but does not require it
 ```.env
 STRIPE_KEY=
 VGS_PROXY=
-VGS_PROXY_CERTIFICATE_B64=
 PUBLIC_URL=
 VGS_COLLECT_LIBRARY_URL=
 VAULT_ID=
@@ -38,9 +37,9 @@ VAULT_ID=
 where 
 
 * `STRIPE_KEY`: Stripe Secret API Key  
-* `VGS_PROXY`: full URL with credentials for the VGS outbound proxy: `https://USERNAME:PASSWORD@<vault-id>.SANDBOX.verygoodproxy.com:8080`
-* `VGS_PROXY_CERTIFICATE_B64`: VGS proxy certificate encoded as a base64 string
-* `PUBLIC_URL`: The public URL of the server without `/` at the end, https://{app-name}.herokuapp.com
+* `VGS_PROXY`: full URL with credentials for the VGS outbound proxy, _https://USERNAME:PASSWORD@<vault_id>.SANDBOX.verygoodproxy.com:8080_
+* `VGS_PROXY_CERTIFICATE_B64`: VGS proxy certificate encoded as a base64 string. **Optional** field, if no - default VGS Sandbox certificate used. 
+* `PUBLIC_URL`: The public URL of the server without `/` at the end, _https://{app-name}.herokuapp.com_
 * `VGS_COLLECT_LIBRARY_URL`: https://dashboard.verygoodsecurity.com -> VGS Collect page
 * `VAULT_ID`: https://dashboard.verygoodsecurity.com -> Settings -> Identifier
 
