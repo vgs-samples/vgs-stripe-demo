@@ -11,8 +11,8 @@ You can run it locally with doker-compose (see below) or deploy to heroku in one
 To configure your VGS routes:
 
 1. Signup or login to [VGS Dashboard](http://dashboard.verygoodsecurity.com)
-2. Create routes by importing from YAML. The repo includes a directory called [routes](https://github.com/verygoodsecurity/vgs-stripe-demo/tree/master/routes) that contain templates of the inbound and outbound routes in YAML format 
-needed by the app to successfully redact the credit card data before hit server.py and then reveal it when it send to Stripe API.
+2. Create routes by importing from YAML. The repo includes a directory called [routes](https://github.com/verygoodsecurity/vgs-stripe-demo/tree/master/routes) that contain templates of the inbound and outbound routes in YAML format needed by the app to successfully redact the credit card data before hit server.py and then reveal it when it send to Stripe API.
+3. Change your inbound route `Destination URL` to your public URL
 
 # Configure Stripe Radar
 
@@ -37,9 +37,9 @@ VAULT_ID=
 where 
 
 * `STRIPE_KEY`: Stripe Secret API Key  
-* `VGS_PROXY`: full URL with credentials for the VGS outbound proxy, _https://USERNAME:PASSWORD@<vault_id>.SANDBOX.verygoodproxy.com:8080_
+* `VGS_PROXY`: full URL with credentials for the VGS outbound proxy, `https://USERNAME:PASSWORD@<vault_id>.SANDBOX.verygoodproxy.com:8080`
 * `VGS_PROXY_CERTIFICATE_B64`: VGS proxy certificate encoded as a base64 string. **Optional** field, if no - default VGS Sandbox certificate used. 
-* `PUBLIC_URL`: The public URL of the server without `/` at the end, _https://{app-name}.herokuapp.com_
+* `PUBLIC_URL`: The public URL of the server without `/` at the end, `https://{app-name}.herokuapp.com`
 * `VGS_COLLECT_LIBRARY_URL`: https://dashboard.verygoodsecurity.com -> VGS Collect page
 * `VAULT_ID`: https://dashboard.verygoodsecurity.com -> Settings -> Identifier
 
