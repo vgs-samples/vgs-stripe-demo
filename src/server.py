@@ -121,8 +121,6 @@ if not os.getenv('VGS_PROXY'):
     raise Exception('VGS_PROXY is missing')
 if not os.getenv('PUBLIC_URL'):
     raise Exception('PUBLIC_URL is missing')
-if not os.getenv('VGS_PROXY_CERTIFICATE_B64'):
-    raise Exception('VGS_PROXY_CERTIFICATE_B64 vgs proxy certificate on base64 string is missing')
 if not os.getenv('VGS_COLLECT_LIBRARY_URL'):
     raise Exception('VGS_COLLECT_LIBRARY_URL is missing')
 if not os.getenv('VAULT_ID'):
