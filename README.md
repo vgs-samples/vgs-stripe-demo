@@ -12,7 +12,7 @@ To configure your VGS routes:
 
 1. Signup or login to [VGS Dashboard](http://dashboard.verygoodsecurity.com)
 2. Create routes by importing from YAML. The repo includes a directory called [routes](https://github.com/verygoodsecurity/vgs-stripe-demo/tree/master/routes) that contain templates of the inbound and outbound routes in YAML format needed by the app to successfully redact the credit card data before hit server.py and then reveal it when it send to Stripe API.
-3. Change your inbound route `Upstream Host` to your public URL
+3. Change your inbound route `Upstream Host` to your public URL (your heroku or ngrok url)
 
 # Configure Stripe Radar
 - Go to [Stripe dashboard](https://dashboard.stripe.com/dashboard) and get your secret key.
