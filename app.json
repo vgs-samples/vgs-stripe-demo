@@ -26,6 +26,10 @@
       "description": "https://dashboard.verygoodsecurity.com -> VGS Collect page",
       "required": true
     },
+    "VGS_COLLECT_ENV": {
+      "description": "Environment - `sandbox` or `live`",
+      "required": true
+    },
     "VAULT_ID": {
       "description": "https://dashboard.verygoodsecurity.com -> Settings -> Identifier",
       "required": true

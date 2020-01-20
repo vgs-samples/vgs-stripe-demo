@@ -31,6 +31,7 @@ STRIPE_KEY=
 VGS_PROXY=
 PUBLIC_URL=
 VGS_COLLECT_LIBRARY_URL=
+VGS_COLLECT_ENV=
 VAULT_ID=
 ```
 
@@ -41,6 +42,7 @@ where
 * `VGS_PROXY_CERTIFICATE_B64`: VGS proxy certificate encoded as a base64 string. **Optional** field, if no - default VGS Sandbox certificate used. 
 * `PUBLIC_URL`: The public URL of the server without `/` at the end, `https://<some_id>.ngrok.io` (see below how to get it)
 * `VGS_COLLECT_LIBRARY_URL`: https://dashboard.verygoodsecurity.com -> VGS Collect page
+* `VGS_COLLECT_ENV`: Environment - `sandbox` or `live`
 * `VAULT_ID`: https://dashboard.verygoodsecurity.com -> Settings -> Identifier
 
 After the `.env` file is create run the app with `docker-compose up -d stripe-demo`
