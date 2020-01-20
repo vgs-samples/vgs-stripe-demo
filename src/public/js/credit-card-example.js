@@ -39,12 +39,7 @@ f.field('#cc-expiration-date .form-control', {
     validations: ['required', 'validCardExpirationDate']
 });
 
-const elements = document.querySelectorAll('label');
-for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', function (t) {
-        field.focus();
-    });
-}
+setTimeout(() => field.focus(), 1000);
 
 document.getElementById('cc-form')
     .addEventListener('submit', function (e) {
