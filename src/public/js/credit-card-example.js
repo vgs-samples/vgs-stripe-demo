@@ -1,7 +1,7 @@
 const f = VGSCollect.create('{{VAULT_ID}}', '{{VGS_COLLECT_ENV}}', function (state) {
 });
 
-const field = f.field('#cc-name .form-control', {
+f.field('#cc-name .form-control', {
     type: 'text',
     name: 'cardName',
     placeholder: 'Joe Business',
@@ -38,8 +38,6 @@ f.field('#cc-expiration-date .form-control', {
     placeholder: '01 / 2022',
     validations: ['required', 'validCardExpirationDate']
 });
-
-setTimeout(() => field.focus(), 1000);
 
 document.getElementById('cc-form')
     .addEventListener('submit', function (e) {
