@@ -29,7 +29,7 @@ def credit_card():
 
 @app.route('/js/credit-card-example.js', methods=['GET'])
 def credit_card_form():
-    return render_template('js/credit-card-example.js', VAULT_ID=os.getenv('VAULT_ID'));
+    return render_template('js/credit-card-example.js', VAULT_ID=os.getenv('VAULT_ID'), VGS_COLLECT_ENV=os.getenv('VGS_COLLECT_ENV'));
 
 @app.route('/transaction_info', methods=['GET'])
 def get():
@@ -123,6 +123,8 @@ if not os.getenv('PUBLIC_URL'):
     raise Exception('PUBLIC_URL is missing')
 if not os.getenv('VGS_COLLECT_LIBRARY_URL'):
     raise Exception('VGS_COLLECT_LIBRARY_URL is missing')
+if not os.getenv('VGS_COLLECT_ENV'):
+    raise Exception('VGS_COLLECT_ENV is missing')
 if not os.getenv('VAULT_ID'):
     raise Exception('VAULT_ID is missing')
 
