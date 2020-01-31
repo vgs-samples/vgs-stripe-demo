@@ -1,7 +1,7 @@
-const f = VGSCollect.create('{{VAULT_ID}}', '{{VGS_COLLECT_ENV}}', function (state) {
+var f = VGSCollect.create('{{VAULT_ID}}', function (state) {
 });
 
-f.field('#cc-name .form-control', {
+var field = f.field('#cc-name .form-control', {
     type: 'text',
     name: 'cardName',
     placeholder: 'Joe Business',
@@ -15,6 +15,7 @@ f.field('#amount .form-control', {
     errorColor: '#D8000C',
     defaultValue: urlParams['amount'] || 100,
 });
+
 
 f.field('#cc-number .form-control', {
     type: 'card-number',
@@ -39,14 +40,21 @@ f.field('#cc-expiration-date .form-control', {
     validations: ['required', 'validCardExpirationDate']
 });
 
+var elements = document.querySelectorAll('label');
+for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', function (t) {
+        field.focus();
+    });
+}
+
 document.getElementById('cc-form')
     .addEventListener('submit', function (e) {
-        const targetForm = e.target;
+        var targetForm = e.target;
         e.preventDefault();
-        const form_error = $("#form-error");
-        let valid_form = true;
-        const keys = Object.keys(f.state);
-        for (let key = 0; key < keys.length; key++) {
+        var form_error = $("#form-error");
+        var valid_form = true;
+        var keys = Object.keys(f.state);
+        for (var key = 0; key < keys.length; key++) {
             valid_form = valid_form && f.state[keys[key]].isValid;
         }
         if (!valid_form) {
