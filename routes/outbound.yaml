@@ -36,7 +36,7 @@ data:
         expression:
          field: ContentType
          type: string
-         operator: media_type_equals
+         operator: equals
          values: [application/x-www-form-urlencoded]
       expression: null
     -
@@ -71,7 +71,7 @@ data:
         expression:
          field: ContentType
          type: string
-         operator: media_type_equals
+         operator: equals
          values: [application/x-www-form-urlencoded]
       expression: null
    host_endpoint: api.stripe.com
