@@ -1,7 +1,7 @@
 # Description
 [VGS Collect.js](https://www.verygoodsecurity.com/collect/collectjs) powered by [VGS](https://www.verygoodsecurity.com) and Stripe 3D Secure (3DS) flow demo application. This is [SCA](https://en.wikipedia.org/wiki/Strong_customer_authentication)-ready integration. To use it you must have VGS and Stripe accounts created and configured. Follow the  instructions below.
 
-You can run it locally with doker-compose (see below) or deploy to heroku in one click.
+You can run it locally with docker-compose (see below) or deploy to heroku in one click.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
