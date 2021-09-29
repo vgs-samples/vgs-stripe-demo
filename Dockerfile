@@ -1,4 +1,4 @@
-FROM python:3.7.3
+FROM python:3.10.0b4
 ADD . /app
 WORKDIR /app
 RUN pip install --upgrade pip
