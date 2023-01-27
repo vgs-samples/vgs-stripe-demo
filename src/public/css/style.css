@@ -804,3 +804,20 @@ footer a:hover {
 nav.navbar .container .navbar-header a.navbar-brand img, nav.navbar .container .navbar-header a.navbar-brand svg {
     width: 120px;
 }
+
+.main-header {
+    background: white;
+    border-bottom: rgba(0, 0, 0, 0.2) solid 1px;
+    height: 60px;
+}
+.main-header ul {
+    align-content: center;
+}
+.main-header ul li {
+    margin: 0 8px;
+}
+.navbar-header {
+    width: 100%;
+    display: flex;
+    justify-content: inherit;
+}
