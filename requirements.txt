@@ -13,5 +13,5 @@ six==1.12.0
 stripe==2.34.0
 ulid-py==0.0.9
 urllib3==1.25.3
-Werkzeug==0.15.5
+Werkzeug==2.2.3
 gunicorn==19.9.0
