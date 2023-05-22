@@ -8,7 +8,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 python-dotenv==0.10.3
-requests==2.22.0
+requests==2.31.0
 six==1.12.0
 stripe==2.34.0
 ulid-py==0.0.9
